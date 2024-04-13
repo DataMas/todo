@@ -1,0 +1,182 @@
+<section class="heading-section">
+  <h1 class="title is-2 has-text-centered">Todos</h1>
+
+
+</section>
+
+<div class="container" id="add-new-form">
+  <div class="add-todo-box">
+    <form (ngSubmit)="onSubmit()">
+      <h2 class="title is-5 has-text-black">New todo</h2>
+      <div class="field is-grouped is-flex-direction-column is-align-items-center">
+        <div class="secA control is-expanded">
+          <input class="input todo black-placeholder" type="text" placeholder="Task name" [(ngModel)]="model.categoryName" name="name">
+          <textarea class="input fixed-size-textarea black-placeholder" type="text" placeholder="Task description" [(ngModel)]="model.categoryDescription" name="desciption"></textarea>
+        </div>
+        <div class="secB control is-expanded is-align-content-space-between">
+          <div class="is-flex">
+            <input class="dateInput input todo black-placeholder" type="date" placeholder="Type todo name">
+            <input class="timeInput input todo black-placeholder" type="time" placeholder="Type todo name">
+            <select class="categorySelect" [(ngModel)]="selectedCategory" name="category-select">
+              <option *ngFor="let option of categoriesList" [value]="option">
+                {{ option.categoryName }}
+              </option>
+            </select>
+          </div>
+        </div>
+        <div class="control is-flex is-justify-content-center is-align-items-center">
+          <button class="button is-info alt-gradient-button" id="submit-todo" type="submit">
+            <i class="material-icons">add</i>
+            Add
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+<div class="section" id="content">
+  <div class="container">
+
+    <div class="columns">
+
+      <div class="column">
+
+        <div class="todo-list">
+          <div class="todo-item">
+            <div class="check-box"> <i class="material-icons">check</i> </div>
+            <div class="todo-content">
+              <div class="todo-name">Name</div>
+              <p class="todo-desc">This is a description. This will apply the justified text alignment to every paragraph on your site, ensuring a consistent look and feel across all textual content.</p>
+              <div class="todo-meta">
+                <div class="todo-info">
+                  <p class="todo-due">Due: 04/04/04 12:45</p>
+                  <p class="todo-category"> Category 1</p>
+                </div>
+                <div class="todo-controls">
+                  <div class="todo-edit"><i class="material-icons">edit</i></div>
+                  <div class="todo-delete"><i class="material-icons">delete</i></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="todo-item">
+            <div class="check-box"> <i class="material-icons">check</i> </div>
+            <div class="todo-content">
+              <div class="todo-name">Name</div>
+              <p class="todo-desc">This is a description. This will apply the justified text alignment to every paragraph on your site, ensuring a consistent look and feel across all textual content.</p>
+              <div class="todo-meta">
+                <div class="todo-info">
+                  <p class="todo-due">Due: 04/04/04 12:45</p>
+                  <p class="todo-category"> Category 1</p>
+                </div>
+                <div class="todo-controls">
+                  <div class="todo-edit"><i class="material-icons">edit</i></div>
+                  <div class="todo-delete"><i class="material-icons">delete</i></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="todo-item">
+            <div class="check-box"> <i class="material-icons">check</i> </div>
+            <div class="todo-content">
+              <div class="todo-name">Name</div>
+              <p class="todo-desc">This is a description. This will apply the justified text alignment to every paragraph on your site, ensuring a consistent look and feel across all textual content.</p>
+              <div class="todo-meta">
+                <div class="todo-info">
+                  <p class="todo-due">Due: 04/04/04 12:45</p>
+                  <p class="todo-category"> Category 1</p>
+                </div>
+                <div class="todo-controls">
+                  <div class="todo-edit"><i class="material-icons">edit</i></div>
+                  <div class="todo-delete"><i class="material-icons">delete</i></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="todo-item">
+            <div class="check-box"> <i class="material-icons">check</i> </div>
+            <div class="todo-content">
+              <div class="todo-name">Name</div>
+              <p class="todo-desc">This is a description. This will apply the justified text alignment to every paragraph on your site, ensuring a consistent look and feel across all textual content.</p>
+              <div class="todo-meta">
+                <div class="todo-info">
+                  <p class="todo-due">Due: 04/04/04 12:45</p>
+                  <p class="todo-category"> Category 1</p>
+                </div>
+                <div class="todo-controls">
+                  <div class="todo-edit"><i class="material-icons">edit</i></div>
+                  <div class="todo-delete"><i class="material-icons">delete</i></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="todo-item">
+            <div class="check-box"> <i class="material-icons">check</i> </div>
+            <div class="todo-content">
+              <div class="todo-name">Name</div>
+              <p class="todo-desc">This is a description. This will apply the justified text alignment to every paragraph on your site, ensuring a consistent look and feel across all textual content.</p>
+              <div class="todo-meta">
+                <div class="todo-info">
+                  <p class="todo-due">Due: 04/04/04 12:45</p>
+                  <p class="todo-category"> Category 1</p>
+                </div>
+                <div class="todo-controls">
+                  <div class="todo-edit"><i class="material-icons">edit</i></div>
+                  <div class="todo-delete"><i class="material-icons">delete</i></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="todo-item">
+            <div class="check-box"> <i class="material-icons">check</i> </div>
+            <div class="todo-content">
+              <div class="todo-name">Name</div>
+              <p class="todo-desc">This is a description. This will apply the justified text alignment to every paragraph on your site, ensuring a consistent look and feel across all textual content.</p>
+              <div class="todo-meta">
+                <div class="todo-info">
+                  <p class="todo-due">Due: 04/04/04 12:45</p>
+                  <p class="todo-category"> Category 1</p>
+                </div>
+                <div class="todo-controls">
+                  <div class="todo-edit"><i class="material-icons">edit</i></div>
+                  <div class="todo-delete"><i class="material-icons">delete</i></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="todo-item completed">
+
+            <div class="check-box"> <i class="material-icons">check</i> </div>
+            <div class="todo-content">
+              <div class="todo-name">Name</div>
+              <p class="todo-desc">This is a description. This will apply the justified text alignment to every paragraph on your site, ensuring a consistent look and feel across all textual content.</p>
+              <div class="todo-meta">
+                <div class="todo-info">
+                  <p class="todo-due">Due: 04/04/04 12:45</p>
+                  <p class="todo-category"> Category 1</p>
+                </div>
+                <div class="todo-controls">
+                  <div class="todo-edit"><i class="material-icons">edit</i></div>
+                  <div class="todo-delete"><i class="material-icons">delete</i></div>
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+        </div>
+
+      </div>
+
+      <div class="column">
+        <app-stats></app-stats>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+

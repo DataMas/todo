@@ -1,0 +1,92 @@
+#stats-section {
+  height: 50%;
+  width: 100%;
+  padding: 6px
+}
+
+#stats-up-container{
+  height: 80%;
+  width: 100%;
+  margin: 0px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .stats-columns{
+    height: 100%;
+    width: 100%;
+    padding: 12px;
+
+    display: flex;
+
+
+
+    .stat-column{
+      display: flex;
+      flex-direction: column;
+
+      height: 100%;
+      width: 22%;
+
+      background: #006eff;
+      opacity: .7;
+
+      border-radius: 22px;
+      padding: 12px;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      font-size: 22px;
+      font-weight: 500;
+
+      color: #eee;
+
+      margin: auto;
+    }
+  }
+}
+
+#stats-lower-container{
+  height: 50%;
+  width: 80%;
+
+  margin-top: 32px;
+  .new-category-form{
+    color: black;
+    background-color: whitesmoke;
+
+    ::placeholder{
+      color: black;
+    }
+
+    .input{
+      margin-top: 6px;
+      background-color: whitesmoke;
+      border-color: lightgrey;
+    }
+
+    .fixed-size-textarea{
+      resize: none;
+      height: 60px;
+    }
+  }
+}
+
+.input{
+  color: black;
+  background: #eee;
+
+    ::placeholder{
+      color: black;
+    }
+}
+
+#submit-category{
+  margin-top: 6px;
+  width: 60%;
+}
+
+

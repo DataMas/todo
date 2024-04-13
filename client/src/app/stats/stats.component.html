@@ -1,0 +1,37 @@
+<div class="section" id="stats-section">
+  <div class="container" id="stats-up-container">
+    <div class="stats-columns">
+      <div class="stat-column">
+        <p class="stat-info">Tasks</p>
+        <p class="stat-content">16</p>
+      </div>
+      <div class="stat-column">
+        <p class="stat-info">Urgent</p>
+        <p class="stat-content">16%</p>
+      </div>
+      <div class="stat-column">
+        <p class="stat-info">Completed</p>
+        <p class="stat-content">84%</p>
+      </div>
+    </div>
+  </div>
+  <div class="container" id="stats-lower-container">
+    <form [formGroup]="categoryForm" (ngSubmit)="onSubmit()">
+      <div class="new-category-form">
+        <h2 class="title is-5 has-text-black">New category</h2>
+        <div class="control">
+          <input class="input todo black-placeholder" formControlName="categoryName" type="text" placeholder="Category name"  name="name" required>
+          <textarea class="input fixed-size-textarea black-placeholder" formControlName="categoryDescription" type="text" placeholder="Category description"  name="desciption"></textarea>
+        </div>
+    </div>
+    <div class="control is-flex is-justify-content-center is-align-items-center">
+      <button class="button is-info alt-gradient-button" id="submit-category" type="submit">
+        <i class="material-icons">add</i>
+        Add
+      </button>
+    </div>
+  </form>
+
+  </div>
+</div>
+
