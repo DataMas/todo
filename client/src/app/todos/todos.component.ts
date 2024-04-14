@@ -30,23 +30,8 @@ export class TodosComponent {
     // this.categoriesForm = t
   };
 
-   ngOnInit():void {
-    this.taskCategoryService.taskCategories$.subscribe(items => {
-      this.categoriesList = items;
-      console.log(this.categoriesList);
-    });
-
-    this.taskCategoryService.getCategoryNames().subscribe();
-  }
 
 
-
-  onSubmit() {
-    this.apiService.sendData(this.model).subscribe({
-      next: (response) => console.log('Success', response),
-      error: (error) => console.error('Error', error)
-    });
-  }
 
 
 }

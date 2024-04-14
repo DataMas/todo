@@ -6,32 +6,7 @@
 
 <div class="container" id="add-new-form">
   <div class="add-todo-box">
-    <form (ngSubmit)="onSubmit()">
-      <h2 class="title is-5 has-text-black">New todo</h2>
-      <div class="field is-grouped is-flex-direction-column is-align-items-center">
-        <div class="secA control is-expanded">
-          <input class="input todo black-placeholder" type="text" placeholder="Task name" [(ngModel)]="model.categoryName" name="name">
-          <textarea class="input fixed-size-textarea black-placeholder" type="text" placeholder="Task description" [(ngModel)]="model.categoryDescription" name="desciption"></textarea>
-        </div>
-        <div class="secB control is-expanded is-align-content-space-between">
-          <div class="is-flex">
-            <input class="dateInput input todo black-placeholder" type="date" placeholder="Type todo name">
-            <input class="timeInput input todo black-placeholder" type="time" placeholder="Type todo name">
-            <select class="categorySelect" [(ngModel)]="selectedCategory" name="category-select">
-              <option *ngFor="let option of categoriesList" [value]="option">
-                {{ option.categoryName }}
-              </option>
-            </select>
-          </div>
-        </div>
-        <div class="control is-flex is-justify-content-center is-align-items-center">
-          <button class="button is-info alt-gradient-button" id="submit-todo" type="submit">
-            <i class="material-icons">add</i>
-            Add
-          </button>
-        </div>
-      </div>
-    </form>
+      <app-task-form></app-task-form>
   </div>
 </div>
 

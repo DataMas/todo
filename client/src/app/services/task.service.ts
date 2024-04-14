@@ -1,20 +1,15 @@
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
+import {Injectable} from "@angular/core";
+import {Task} from "../models/task.model";
 
-export interface Task {
-    taskName: string;
-    taskDescription : string;
-    deadline: string;
-    category: number
-}
-
+@Injectable({providedIn: 'root'})
 export class TaskService {
     private baseUrl = "http://localhost:8080/api/categories";
 
-    constructor(private http:HttpClient) {
-    }
+    constructor(private http:HttpClient) {}
 
-    addTask(task: Task): Observable<Task> {
-        return this.http.post<Task>(this.baseUrl, task);
+    createTask(task: Task): Observable<Task> {
+        return this.http.post<Task>(this.baseUrl+'/'+task.category+"/tasks", task);
     }
 }

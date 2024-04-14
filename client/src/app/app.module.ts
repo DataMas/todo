@@ -9,12 +9,14 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { StatsComponent } from './stats/stats.component';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {ToastrModule} from "ngx-toastr";
+import { TaskFormComponent } from './task-form/task-form.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TodosComponent,
-    StatsComponent
+    StatsComponent,
+    TaskFormComponent
   ],
   imports: [
     BrowserModule,

@@ -46,5 +46,33 @@ public class TaskController {
         return ResponseEntity.ok(newTask);
     }
 
+    @GetMapping("/tasks/{id}")
+    public ResponseEntity<Task> getTaskById(@PathVariable Long taskId) {
+     Task _task = taskRepository.findById(taskId)
+             .orElseThrow(() -> new ResourceNotFoundException("Task with ID "+taskId+" not found"));
+     return ResponseEntity.ok(_task);
+    }
 
+    //TODO Check later
+    @PutMapping("/{id}")
+    public ResponseEntity<Task> updateTask(@PathVariable Long id, @RequestBody Task taskRequest) {
+        Task task = taskRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Task with ID "+id+" not found"));
+
+        task.setTaskName(taskRequest.getTaskName());
+        task.setTaskDescription(taskRequest.getTaskDescription());
+        task.setDeadline(taskRequest.getDeadline());
+
+        final Task updatedTask = taskRepository.save(task);
+        return ResponseEntity.ok(updatedTask);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteTask(@PathVariable Long taskId) {
+        Task task = taskRepository.findById(taskId)
+                .orElseThrow(() -> new ResourceNotFoundException("Task with ID "+taskId+" not found"));
+
+        taskRepository.delete(task);
+        return ResponseEntity.noContent().build();
+    }
 }

@@ -18,9 +18,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 
@@ -59,11 +57,23 @@ public class TaskCategoryController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-//    @GetMapping("/names")
-//    public ResponseEntity<List<String>> getAllCategoriesNames() {
-//        List<String> categoryNames = taskCategoryService.getAllCategoryNames();
-//        return new ResponseEntity<>(categoryNames, HttpStatus.OK);
-//    }
+    @PutMapping("/{id}")
+    public ResponseEntity<TaskCategory> updateCategory(@PathVariable Long id,
+                                                       @RequestBody TaskCategory categoryDetails) {
+        TaskCategory category = taskCategoryRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Category not found with id: " + id));
 
-    // Add more endpoints for update and delete if needed
+        category.setCategoryName(categoryDetails.getCategoryName());
+        category.setCategoryDescription(categoryDetails.getCategoryDescription());
+        final TaskCategory updatedCategory = taskCategoryRepository.save(category);
+        return ResponseEntity.ok(updatedCategory);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteCategory(@PathVariable Long id) {
+        TaskCategory category = taskCategoryRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Category not found with id: " + id));
+        taskCategoryRepository.delete(category);
+        return ResponseEntity.noContent().build();
+    }
 }
