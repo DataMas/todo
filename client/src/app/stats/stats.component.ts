@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {HttpClient} from "@angular/common/http";
 import {TaskCategoriesService, TaskCategory} from "../services/taskCategories.service";
-// import {ToastrService} from "ngx-toastr";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-stats',
@@ -15,8 +15,7 @@ export class StatsComponent {
 
   constructor(private fb: FormBuilder, private http: HttpClient,
               private taskCategoryService: TaskCategoriesService,
-              // private toastr: ToastrService) {
-  ){
+              private toastr: ToastrService) {
     this.categoryForm = this.fb.group({
       categoryName: ['', Validators.required],
       categoryDescription: ['']
@@ -29,10 +28,11 @@ export class StatsComponent {
       this.taskCategoryService.addCategory(this.categoryForm.value as TaskCategory)
         .subscribe(
           () => {
+            this.toastr.success("New task category created.", "Success")
             this.categoryForm.reset();
           },
           error => {
-            // this.toastr.error("Internal server error!", "Server error!")
+            this.toastr.error("Internal server error!", "Server error!")
             console.log("error");
           }
         )

@@ -8,7 +8,7 @@ import { TodosComponent } from './todos/todos.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { StatsComponent } from './stats/stats.component';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-// import {ToastrModule} from "ngx-toastr";
+import {ToastrModule} from "ngx-toastr";
 
 @NgModule({
   declarations: [
@@ -23,11 +23,11 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    // ToastrModule.forRoot({
-    //   timeOut: 10000,
-    //   positionClass: 'toast-bottom-right',
-    //   preventDuplicates: true,
-    // }), // ToastrModule added
+    ToastrModule.forRoot({
+      timeOut: 10000,
+      positionClass: 'toast-top-right',
+      preventDuplicates: true,
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent]

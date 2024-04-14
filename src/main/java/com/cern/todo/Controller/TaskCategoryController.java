@@ -1,7 +1,10 @@
 package com.cern.todo.Controller;
 
+import com.cern.todo.Entities.Task;
 import com.cern.todo.Entities.TaskCategory;
+import com.cern.todo.Exception.ResourceNotFoundException;
 import com.cern.todo.Repository.TaskCategoryRepository;
+import com.cern.todo.Repository.TaskRepository;
 import com.cern.todo.Services.TaskCategoryService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,6 +37,8 @@ public class TaskCategoryController {
     private TaskCategoryRepository taskCategoryRepository;
     @Autowired
     private TaskCategoryService taskCategoryService;
+    @Autowired
+    private TaskRepository taskRepository;
 
     @GetMapping
     public List<TaskCategory> getAllCategories() {
