@@ -23,17 +23,31 @@ public class TaskService {
         this.taskCategoryRepository = taskCategoryRepository;
     }
 
+    /**
+     * Get all tasks
+     * @return List of all tasks
+     */
     public List<TaskUpdateDTO> getAllTasks() {
         List<Task> tasks = taskRepository.findAll();
         return tasks.stream().map(this::convertToUpdateDTO).collect(Collectors.toList());
     }
 
+    /**
+     * Get tasks with status 0 or 1
+     * @return List of relevant tasks
+     */
     public List<TaskReadDTO> getShowTasks() {
         List<Integer> statuses = Arrays.asList(0, 1);
         List<Task> tasks = taskRepository.findByStatusIn(statuses);
         return tasks.stream().map(this::convertToReadDTO).collect(Collectors.toList());
     }
 
+    /**
+     * Updata task by ID
+     * @param id The Id of the task to be updated
+     * @param taskUpdateDTO The Information of the update
+     * @return Updated task
+     */
     public Task updateTaskById(Long id, TaskUpdateDTO taskUpdateDTO) {
         Task task = taskRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Task with ID "+id+" not found"));
@@ -56,6 +70,12 @@ public class TaskService {
         return updatedTask;
     }
 
+    /**
+     * Create new task
+     * @param taskUpdateDTO The information of the new task
+     * @param categoryId The category ID of the new task
+     * @return The created task
+     */
     public Task createTask(TaskUpdateDTO taskUpdateDTO, Long categoryId) {
         TaskCategory category = taskCategoryRepository.findById(categoryId)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid category ID"));
@@ -70,6 +90,11 @@ public class TaskService {
         return taskRepository.save(task);
     }
 
+    /**
+     * Convert to UpdateDTO
+     * @param task The task
+     * @return TaskUpdateDTO
+     */
     private TaskUpdateDTO convertToUpdateDTO(Task task) {
         TaskUpdateDTO taskDTO = new TaskUpdateDTO();
 
@@ -84,6 +109,11 @@ public class TaskService {
 
     }
 
+    /**
+     * Convert to ReadDTO
+     * @param task The task
+     * @return TaskReadDTO
+     */
     private TaskReadDTO convertToReadDTO(Task task) {
         TaskReadDTO taskReadDTO = new TaskReadDTO();
 

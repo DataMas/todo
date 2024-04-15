@@ -13,6 +13,7 @@ public class TaskUpdateDTO {
     private String taskDescription;
     private String categoryName;
     private Long categoryId;
+    @NotNull(message = "Task deadline cannot be null")
     private Timestamp deadline;
     @NotNull(message = "Task name cannot be null")
     private Integer status;

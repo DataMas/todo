@@ -3,17 +3,11 @@ package com.cern.todo.Controller;
 import com.cern.todo.DTOs.TaskUpdateDTO;
 import com.cern.todo.Entities.Task;
 import com.cern.todo.Entities.TaskCategory;
-import com.cern.todo.Exception.ErrorResponse;
 import com.cern.todo.Exception.ResourceNotFoundException;
 import com.cern.todo.Repository.TaskCategoryRepository;
 import com.cern.todo.Services.TaskService;
 import com.cern.todo.Utils.ApiResponse;
-import jakarta.validation.ConstraintViolation;
-import jakarta.validation.ConstraintViolationException;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.Pattern;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,8 +24,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/categories")
 public class TaskCategoryController {
-
-    private static final Logger logger = LoggerFactory.getLogger(TaskCategoryController.class);
 
     @Autowired
     private TaskCategoryRepository taskCategoryRepository;
@@ -111,7 +103,6 @@ public class TaskCategoryController {
     @PostMapping("/{categoryId}/tasks")
     public ResponseEntity<?> createTask(@PathVariable Long categoryId, @Valid @RequestBody TaskUpdateDTO taskRequest) {
         try {
-
             Task task = taskService.createTask(taskRequest, categoryId);
 
             return ResponseEntity.ok(task);
@@ -119,7 +110,6 @@ public class TaskCategoryController {
         } catch (IllegalArgumentException | ResourceNotFoundException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
-
     }
 
     /**
@@ -139,6 +129,11 @@ public class TaskCategoryController {
         return ResponseEntity.badRequest().body(response);
     }
 
+    /**
+     * Handle type mismatch validation exception. Return a message with all the validation issues.
+     * @param ex The exception
+     * @return Response with error message
+     */
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
     public ResponseEntity<?> handleValidationExceptions(MethodArgumentTypeMismatchException ex) {
@@ -146,6 +141,11 @@ public class TaskCategoryController {
         return ResponseEntity.badRequest().body(response);
     }
 
+    /**
+     * Handle resource exception. Return a message with all the validation issues.
+     * @param ex The exception
+     * @return Response with error message
+     */
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity<?> handleResourceExceptions(ResourceNotFoundException ex) {
