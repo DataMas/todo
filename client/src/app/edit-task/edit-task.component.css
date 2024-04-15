@@ -6,9 +6,12 @@
     align-items: center;
     justify-content: center;
 
+    background: #eeeeee;
+
     /* Override position to not interfere with flexbox */
     position: static;
-    padding: 50px;
+    padding: 30px;
+    width: 100%;
 
     .close-dialog{
         align-self: flex-end;
@@ -26,19 +29,6 @@
 
 }
 
-#add-new-form {
-    max-width: 600px;
-    width: 90%;
-}
-
-.add-todo-box{
-    padding: 25px;
-    border-radius: 6px;
-    margin-top: -172px;
-    background: whitesmoke;
-
-    box-shadow: 0 4px 12px black;
-}
 
 .field{
     width: 100%;
@@ -77,11 +67,11 @@
 }
 
 .dateInput{
-    width: 30%;
+    width: 50%;
 }
 
 .timeInput{
-    width: 30%;
+    width: 37%;
 }
 
 .categorySelect {
@@ -138,121 +128,4 @@
 
 }
 
-.todo-item {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    padding: 6px;
-    margin-bottom: 5px;
 
-    border-radius: 6px;
-
-    box-shadow: 0 2px 6px rgba(0,0,0, 0.6);
-
-    color: #333;
-
-    &.completed{
-        color: #aaa;
-    }
-}
-
-.todo-item .check-box {
-    display: flex;
-    align-items: center;
-    justify-items: center;
-
-    margin-right: 12px;
-    width: 26px;
-    height: 26px;
-
-    cursor: pointer;
-
-    border: 2px solid #eee;
-    border-radius: 50%;
-
-
-    i.material-icons {
-        font-size: 20px;
-
-        opacity: 0;
-
-        transition: opacity 0.2s;
-
-        &:hover{
-            opacity: 1;
-            background: #eee;
-        }
-    }
-}
-
-.todo-item.completed .check-box{
-    background: rgba(11,223,170);
-    border-color: rgba(11,223,170);
-    i.material-icons{
-        opacity: 1;
-        color: #333;
-    }
-}
-
-.todo-item .todo-content {
-    width: 100%;
-
-    .todo-desc{
-        text-align: justify;
-    }
-}
-
-.todo-item .todo-meta {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-items: flex-end;
-    /*justify-self: flex-end;*/
-
-}
-
-.todo-item .todo-content .todo-meta{
-    display: flex;
-    justify-content: space-between;
-    align-content: center;
-    margin-top: 2px;
-
-    height: 50%;
-
-    .todo-info {
-        display: flex;
-        align-content: center;
-        justify-content: center;
-        .todo-due {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-
-            margin-right: 6px;
-        }
-
-        .todo-category {
-            background: cornflowerblue;
-            opacity: .8;
-            color: white;
-            font-weight: 600;
-            font-size: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-
-            border-radius: 12px;
-            padding-left: 2px;
-            padding-right: 2px;
-        }
-    }
-
-    .todo-controls{
-        display: flex;
-        flex-direction: row;
-        justify-self: right;
-        align-self: right;
-    }
-}

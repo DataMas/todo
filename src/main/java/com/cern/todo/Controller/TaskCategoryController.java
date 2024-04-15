@@ -7,7 +7,11 @@ import com.cern.todo.Exception.ErrorResponse;
 import com.cern.todo.Exception.ResourceNotFoundException;
 import com.cern.todo.Repository.TaskCategoryRepository;
 import com.cern.todo.Services.TaskService;
+import com.cern.todo.Utils.ApiResponse;
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.ConstraintViolationException;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Pattern;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +20,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
 
 import java.util.ArrayList;
@@ -73,7 +78,7 @@ public class TaskCategoryController {
      */
     @PutMapping("/{id}")
     public ResponseEntity<TaskCategory> updateCategory(@PathVariable Long id,
-                                                       @RequestBody TaskCategory categoryDetails) {
+                                                       @Valid @RequestBody TaskCategory categoryDetails) {
         TaskCategory category = taskCategoryRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Category not found with id: " + id));
 
@@ -89,11 +94,12 @@ public class TaskCategoryController {
      * @return Response with message
      */
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteCategory(@PathVariable Long id) {
+    public ResponseEntity<?> deleteCategory(@PathVariable Long id) {
         TaskCategory category = taskCategoryRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Category not found with id: " + id));
         taskCategoryRepository.delete(category);
-        return ResponseEntity.noContent().build();
+        ApiResponse response = new ApiResponse("Category with id " + id + " deleted with success");
+        return ResponseEntity.status(HttpStatus.GONE).body(response);
     }
 
     /**
@@ -118,7 +124,7 @@ public class TaskCategoryController {
 
     /**
      * Handle the api validation errors. Return a message with all the validation issues.
-     * @param ex The exceptionß
+     * @param ex The exception
      * @return Response with error message
      */
     @ResponseStatus(HttpStatus.BAD_REQUEST)
@@ -129,7 +135,22 @@ public class TaskCategoryController {
         for (ObjectError error : ex.getBindingResult().getAllErrors()) {
             details.add(error.getDefaultMessage());
         }
-        ErrorResponse error = new ErrorResponse("Validation Failed", details);
-        return new ResponseEntity(error, HttpStatus.BAD_REQUEST);
+        ApiResponse response = new ApiResponse("Validation Error: " + String.join(", ", details));
+        return ResponseEntity.badRequest().body(response);
     }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(MethodArgumentTypeMismatchException.class)
+    public ResponseEntity<?> handleValidationExceptions(MethodArgumentTypeMismatchException ex) {
+        ApiResponse response = new ApiResponse("Validation Error: " + ex.getMessage());
+        return ResponseEntity.badRequest().body(response);
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public ResponseEntity<?> handleResourceExceptions(ResourceNotFoundException ex) {
+        ApiResponse response = new ApiResponse("Resource Error: " + ex.getMessage());
+        return ResponseEntity.badRequest().body(response);
+    }
+
 }

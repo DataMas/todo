@@ -26,50 +26,6 @@
   box-shadow: 0 4px 12px black;
 }
 
-.field{
-  width: 100%;
-}
-
-.todo {
-  background-color: whitesmoke;
-  border-color: lightgrey;
-  padding: 6px;
-  margin: 6px;
-}
-
-.control {
-  width: 100%;
-}
-
-.input{
-  color: black;
-  background: whitesmoke;
-
-  ::placeholder{
-    color: black;
-  }
-}
-
-.secA {
-  width: 100%;
-}
-
-.secB {
-  height: 100%;
-
-  ::placeholder{
-    color:#333 ;
-  }
-}
-
-.dateInput{
-  width: 30%;
-}
-
-.timeInput{
-  width: 30%;
-}
-
 .categorySelect {
   width: 40%;
   background-color: whitesmoke;
@@ -91,10 +47,6 @@
   color: black;
 }
 
-::placeholder{
-  color: black;
-}
-
 #submit-todo {
   width: 78%;
 }
@@ -109,7 +61,7 @@
   border-radius: 6px;
   background: whitesmoke;
 
-  max-width: 98%;
+  max-width: 96%;
   height: 53vh;
 
   .columns{
@@ -119,6 +71,7 @@
 
   .column{
     max-height: 100%;
+    width: 90%;
     overflow-y: scroll;
   }
 

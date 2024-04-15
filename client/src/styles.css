@@ -33,5 +33,9 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   transform: translate(-50%, -50%);
 
   width: 50%;
+}
 
+.cdk-overlay-dark-backdrop {
+  width: 100vw;
+  margin-left: -50%;
 }

@@ -70,7 +70,7 @@ export class TaskListComponent {
 
   openEditModal(task: Task): void {
     const dialogRef = this.dialog.open(EditTaskComponent, {
-      width: '96%',
+      width: '100%',
       data: task
     });
 
