@@ -23,19 +23,19 @@ export class StatsComponent {
   }
 
   onSubmit(): void {
-    console.log('inside', this.categoryForm)
     if (this.categoryForm.valid) {
       this.taskCategoryService.addCategory(this.categoryForm.value as TaskCategory)
         .subscribe(
           () => {
-            this.toastr.success("New task category created.", "Success")
+            this.toastr.success("New task category created.", "Success!")
             this.categoryForm.reset();
           },
           error => {
-            this.toastr.error("Internal server error!", "Server error!")
-            console.log("error");
+            this.toastr.error("Internal server error.", "Server error")
           }
         )
+    } else {
+      this.toastr.error("Name is required", "New category");
     }
   }
 

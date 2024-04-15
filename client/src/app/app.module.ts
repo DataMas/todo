@@ -10,13 +10,18 @@ import { StatsComponent } from './stats/stats.component';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {ToastrModule} from "ngx-toastr";
 import { TaskFormComponent } from './task-form/task-form.component';
+import { TaskListComponent } from './task-list/task-list.component';
+import { EditTaskComponent } from './edit-task/edit-task.component';
+import {MatDialogModule} from "@angular/material/dialog";
 
 @NgModule({
   declarations: [
     AppComponent,
     TodosComponent,
     StatsComponent,
-    TaskFormComponent
+    TaskFormComponent,
+    TaskListComponent,
+    EditTaskComponent
   ],
   imports: [
     BrowserModule,
@@ -24,12 +29,13 @@ import { TaskFormComponent } from './task-form/task-form.component';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    MatDialogModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot({
       timeOut: 10000,
       positionClass: 'toast-top-right',
       preventDuplicates: true,
-    }),
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -22,6 +22,9 @@ public class Task {
     @Column(name = "task_description", length = 500)
     private String taskDescription;
 
+    @Column(name = "status", nullable = false)
+    private Integer status;
+
     @Column(name = "deadline")
     private Timestamp deadline;
 
@@ -30,6 +33,19 @@ public class Task {
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
     private TaskCategory category;
+
+    public Task() {
+
+    }
+
+    public Task(String taskName, String taskDescription, Timestamp deadline, TaskCategory category, Integer status) {
+        this.taskName = taskName;
+        this.taskDescription = taskDescription;
+        this.deadline = deadline;
+        this.category = category;
+        this.status = status;
+    }
+
 
     public Long getTaskId() {
         return taskId;
@@ -41,6 +57,10 @@ public class Task {
 
     public String getTaskDescription() {
         return taskDescription;
+    }
+
+    public Integer getStatus() {
+        return status;
     }
 
     public Timestamp getDeadline() {
@@ -61,6 +81,10 @@ public class Task {
 
     public void setTaskDescription(String taskDescription) {
         this.taskDescription = taskDescription;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 
     public void setDeadline(Timestamp deadline) {

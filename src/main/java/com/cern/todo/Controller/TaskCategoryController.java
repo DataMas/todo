@@ -1,11 +1,12 @@
 package com.cern.todo.Controller;
 
+import com.cern.todo.DTOs.TaskUpdateDTO;
 import com.cern.todo.Entities.Task;
 import com.cern.todo.Entities.TaskCategory;
 import com.cern.todo.Exception.ResourceNotFoundException;
 import com.cern.todo.Repository.TaskCategoryRepository;
-import com.cern.todo.Repository.TaskRepository;
-import com.cern.todo.Services.TaskCategoryService;
+import com.cern.todo.Services.TaskService;
+import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,9 +35,7 @@ public class TaskCategoryController {
     @Autowired
     private TaskCategoryRepository taskCategoryRepository;
     @Autowired
-    private TaskCategoryService taskCategoryService;
-    @Autowired
-    private TaskRepository taskRepository;
+    private TaskService taskService;
 
     @GetMapping
     public List<TaskCategory> getAllCategories() {
@@ -75,5 +74,19 @@ public class TaskCategoryController {
                 .orElseThrow(() -> new ResourceNotFoundException("Category not found with id: " + id));
         taskCategoryRepository.delete(category);
         return ResponseEntity.noContent().build();
+    }
+
+    @PostMapping("/{categoryId}/tasks")
+    public ResponseEntity<?> createTask(@PathVariable Long categoryId, @Valid @RequestBody TaskUpdateDTO taskRequest) {
+        try {
+
+            Task task = taskService.createTask(taskRequest, categoryId);
+
+            return ResponseEntity.ok(task);
+
+        } catch (IllegalArgumentException | ResourceNotFoundException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+
     }
 }
