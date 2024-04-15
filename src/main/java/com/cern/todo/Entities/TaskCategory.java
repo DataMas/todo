@@ -1,6 +1,8 @@
 package com.cern.todo.Entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "task_categories")
@@ -11,6 +13,7 @@ public class TaskCategory {
     private Long categoryId;
 
     @Column(name = "category_name", nullable = false, length = 100)
+    @NotBlank(message = "Category name is required")
     private String categoryName;
 
     @Column(name = "category_description", length = 500)

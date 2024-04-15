@@ -3,6 +3,7 @@ package com.cern.todo.Controller;
 import com.cern.todo.DTOs.TaskUpdateDTO;
 import com.cern.todo.Entities.Task;
 import com.cern.todo.Entities.TaskCategory;
+import com.cern.todo.Exception.ErrorResponse;
 import com.cern.todo.Exception.ResourceNotFoundException;
 import com.cern.todo.Repository.TaskCategoryRepository;
 import com.cern.todo.Services.TaskService;
@@ -12,17 +13,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.*;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:4200")
@@ -43,8 +39,7 @@ public class TaskCategoryController {
     }
 
     @PostMapping
-    public ResponseEntity<TaskCategory> createCategory(@RequestBody TaskCategory category) {
-//        logger.info(category.toString());
+    public ResponseEntity<?> createCategory(@Valid @RequestBody TaskCategory category) {
         TaskCategory _category = taskCategoryRepository.save(category);
         return new ResponseEntity<>(_category, HttpStatus.CREATED);
     }
@@ -88,5 +83,17 @@ public class TaskCategoryController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
 
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<?> handleValidationExceptions(MethodArgumentNotValidException ex) {
+
+        List<String> details = new ArrayList<>();
+        for (ObjectError error : ex.getBindingResult().getAllErrors()) {
+            details.add(error.getDefaultMessage());
+        }
+        ErrorResponse error = new ErrorResponse("Validation Failed", details);
+        return new ResponseEntity(error, HttpStatus.BAD_REQUEST);
     }
 }
