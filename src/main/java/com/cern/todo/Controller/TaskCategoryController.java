@@ -33,17 +33,31 @@ public class TaskCategoryController {
     @Autowired
     private TaskService taskService;
 
+    /**
+     * Read all the categories
+     * @return Response with message
+     */
     @GetMapping
     public List<TaskCategory> getAllCategories() {
         return taskCategoryRepository.findAll();
     }
 
+    /**
+     * Create a new category
+     * @param category The request body with the category info
+     * @return Response with message
+     */
     @PostMapping
     public ResponseEntity<?> createCategory(@Valid @RequestBody TaskCategory category) {
         TaskCategory _category = taskCategoryRepository.save(category);
         return new ResponseEntity<>(_category, HttpStatus.CREATED);
     }
 
+    /**
+     * Read a category by ID
+     * @param id The ID of the category to be read
+     * @return Response with message
+     */
     @GetMapping("/{id}")
     public ResponseEntity<TaskCategory> getCategoryById(@PathVariable Long id) {
         return taskCategoryRepository.findById(id)
@@ -51,6 +65,12 @@ public class TaskCategoryController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
+    /**
+     * Update a category by ID
+     * @param id The ID of the category to be updated
+     * @param categoryDetails The request body containing the updated category info
+     * @return Response with message
+     */
     @PutMapping("/{id}")
     public ResponseEntity<TaskCategory> updateCategory(@PathVariable Long id,
                                                        @RequestBody TaskCategory categoryDetails) {
@@ -63,6 +83,11 @@ public class TaskCategoryController {
         return ResponseEntity.ok(updatedCategory);
     }
 
+    /**
+     * Delete category by ID
+     * @param id The ID of the category to be deleted
+     * @return Response with message
+     */
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteCategory(@PathVariable Long id) {
         TaskCategory category = taskCategoryRepository.findById(id)
@@ -71,6 +96,12 @@ public class TaskCategoryController {
         return ResponseEntity.noContent().build();
     }
 
+    /**
+     * Create an new task. Assign the given category to the task by reference.
+     * @param categoryId The ID of the category
+     * @param taskRequest The body of the request
+     * @return Reposnse with message
+     */
     @PostMapping("/{categoryId}/tasks")
     public ResponseEntity<?> createTask(@PathVariable Long categoryId, @Valid @RequestBody TaskUpdateDTO taskRequest) {
         try {
@@ -85,6 +116,11 @@ public class TaskCategoryController {
 
     }
 
+    /**
+     * Handle the api validation errors. Return a message with all the validation issues.
+     * @param ex The exceptionß
+     * @return Response with error message
+     */
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<?> handleValidationExceptions(MethodArgumentNotValidException ex) {
