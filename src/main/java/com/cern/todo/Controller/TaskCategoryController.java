@@ -45,7 +45,7 @@ public class TaskCategoryController {
      * @return Response with message
      */
     @PostMapping
-    public ResponseEntity<?> createCategory(@Valid @RequestBody TaskCategory category) {
+    public ResponseEntity<TaskCategory> createCategory(@Valid @RequestBody TaskCategory category) {
         TaskCategory _category = taskCategoryRepository.save(category);
         return new ResponseEntity<>(_category, HttpStatus.CREATED);
     }
@@ -91,7 +91,7 @@ public class TaskCategoryController {
                 .orElseThrow(() -> new ResourceNotFoundException("Category not found with id: " + id));
         taskCategoryRepository.delete(category);
         ApiResponse response = new ApiResponse("Category with id " + id + " deleted with success");
-        return ResponseEntity.status(HttpStatus.GONE).body(response);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
     /**

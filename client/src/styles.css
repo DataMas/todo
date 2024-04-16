@@ -23,7 +23,7 @@
 }
 
 
-html, body { height: 100%; }
+html, body { height: 100%; scrollbar-width: none; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .cdk-overlay-container{
@@ -35,7 +35,23 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   width: 50%;
 }
 
+.mdc-dialog__container{
+  background-color: whitesmoke;
+  border-radius: 12px;
+  .mat-mdc-dialog-surface.mdc-dialog__surface{
+    background-color: whitesmoke;
+  }
+}
+
 .cdk-overlay-dark-backdrop {
   width: 100vw;
   margin-left: -50%;
+}
+
+.container {
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+  scrollbar-width: none;  /* Firefox */
+}
+.container::-webkit-scrollbar {
+  display: none;  /* Safari and Chrome */
 }

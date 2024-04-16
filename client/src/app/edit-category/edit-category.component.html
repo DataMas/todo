@@ -1,0 +1,18 @@
+<div class="container" id="stats-lower-container">
+    <div class="close-dialog" (click)="onClose()"><i class="material-icons">close</i> </div>
+    <form [formGroup]="categoryForm" (ngSubmit)="onSubmit()">
+        <div class="new-category-form">
+            <h2 class="title is-5 has-text-black">Edit category</h2>
+            <div class="control">
+                <input class="input todo black-placeholder" formControlName="categoryName" type="text" placeholder="Category name"  name="name" required>
+                <textarea class="input fixed-size-textarea black-placeholder" formControlName="categoryDescription" type="text" placeholder="Category description"  name="desciption"></textarea>
+            </div>
+            <div class="control is-flex is-justify-content-center is-align-items-center">
+                <button class="button is-info alt-gradient-button" id="submit-category" type="submit">
+                    <i class="material-icons">add</i>
+                    Update
+                </button>
+            </div>
+        </div>
+    </form>
+</div>

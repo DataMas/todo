@@ -1,29 +1,51 @@
 <div class="todo-list">
-    <div *ngIf="tasks.length > 0 ; else noTasksTemplate">
-        <div *ngFor="let task of tasks" [ngClass]="{ 'completed':task.status === 1, 'active': task.status === 0}">
-            <div class="todo-item">
-                <div class="check-box"> <i class="material-icons">check</i> </div>
-                <div class="todo-content">
-                    <h3 class="todo-name">{{ task.taskName }}</h3>
-                    <p class="todo-desc">This is a description. This will apply the justified text alignment to every paragraph on your site, ensuring a consistent look and feel across all textual content.</p>
-                    <div class="todo-meta">
-                        <div class="todo-info">
-                            <p class="todo-due">Due: {{ task.taskDate }} {{ task.taskTime }}</p>
-                            <p class="todo-category"> {{ task.categoryName }}</p>
-                        </div>
-                        <div class="todo-controls">
-                            <div class="todo-complete" (click)="updateTaskStatus(task, 1)" [ngClass]="{ 'disabled': task.status === 1 }"><i class="material-icons">check_circle</i> </div>
-                            <div class="todo-edit" (click)="openEditModal(task)" [ngClass]="{ 'disabled': task.status === 1 }"><i class="material-icons">edit</i></div>
-                            <div class="todo-delete" (click)="updateTaskStatus(task, -1)"><i class="material-icons">delete</i></div>
+    <div class="content-selection" (click)="toggleButtonText()">{{buttonText}}</div>
+    <div *ngIf="buttonText === 'Tasks'">
+        <div *ngIf="tasks.length > 0 ; else noTasksTemplate">
+            <div *ngFor="let task of tasks" [ngClass]="{ 'completed':task.status === 1, 'active': task.status === 0}">
+                <div class="todo-item">
+                    <div class="check-box"> <i class="material-icons">check</i> </div>
+                    <div class="todo-content">
+                        <h3 class="todo-name">{{ task.taskName }}</h3>
+                        <p class="todo-desc">This is a description. This will apply the justified text alignment to every paragraph on your site, ensuring a consistent look and feel across all textual content.</p>
+                        <div class="todo-meta">
+                            <div class="todo-info">
+                                <p class="todo-due">Due: {{ task.taskDate }} {{ task.taskTime }}</p>
+                                <p class="todo-category"> {{ task.categoryName }}</p>
+                            </div>
+                            <div class="todo-controls">
+                                <div class="todo-complete" (click)="updateTaskStatus(task, 1)" [ngClass]="{ 'disabled': task.status === 1 }"><i class="material-icons">check_circle</i> </div>
+                                <div class="todo-edit" (click)="openEditModal(task)" [ngClass]="{ 'disabled': task.status === 1 }"><i class="material-icons">edit</i></div>
+                                <div class="todo-delete" (click)="updateTaskStatus(task, -1)"><i class="material-icons">delete</i></div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <div *ngIf="buttonText === 'Categories'">
+        <div *ngIf="categories.length > 0 ; else noTasksTemplate">
+            <div *ngFor="let category of categories" class="active">
+                <div class="todo-item">
+                    <div class="todo-content">
+                        <h3 class="todo-name">{{ category.categoryName }}</h3>
+                        <p class="todo-desc">{{ category.categoryDescription }}</p>
+                        <div class="todo-meta">
+                            <div class="todo-controls">
+                                <div class="todo-edit"  (click)="openCategoryEditModal(category)"><i class="material-icons">edit</i></div>
+                                <div class="todo-delete" (click)="deleteCategory(category.categoryId)"><i class="material-icons">delete</i></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <ng-template #noTasksTemplate>
         <div class="no-tasks-message">
-            There are no tasks registered yet.
+            There are no items registered yet.
         </div>
     </ng-template>
 

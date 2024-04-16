@@ -1,0 +1,61 @@
+#stats-lower-container{
+    height: 100%;
+    width: 80%;
+
+    padding: 1px;
+    margin-top: 32px;
+
+    background-color: whitesmoke;
+
+    display: flex;
+    flex-direction: column;
+
+    .close-dialog{
+        align-self: flex-end;
+
+        color: #333333;
+
+        opacity: 0.5;
+
+        cursor: pointer;
+
+        &:hover {
+            opacity: 1;
+        }
+    }
+
+    .new-category-form{
+        color: black;
+        background-color: whitesmoke;
+        padding: 30px;
+
+        ::placeholder{
+            color: black;
+        }
+
+        .input{
+            margin-top: 6px;
+            background-color: whitesmoke;
+            border-color: lightgrey;
+        }
+
+        .fixed-size-textarea{
+            resize: none;
+            height: 60px;
+        }
+    }
+}
+
+.input{
+    color: black;
+    background: #eee;
+
+    ::placeholder{
+        color: black;
+    }
+}
+
+#submit-category{
+    margin-top: 6px;
+    width: 60%;
+}

@@ -13,6 +13,7 @@ import { TaskFormComponent } from './task-form/task-form.component';
 import { TaskListComponent } from './task-list/task-list.component';
 import { EditTaskComponent } from './edit-task/edit-task.component';
 import {MatDialogModule} from "@angular/material/dialog";
+import { EditCategoryComponent } from './edit-category/edit-category.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import {MatDialogModule} from "@angular/material/dialog";
     StatsComponent,
     TaskFormComponent,
     TaskListComponent,
-    EditTaskComponent
+    EditTaskComponent,
+    EditCategoryComponent
   ],
   imports: [
     BrowserModule,

@@ -7,9 +7,6 @@
     margin: 6px;
 }
 
-.control {
-    width: 100%;
-}
 
 
 .todo-item {
@@ -177,4 +174,25 @@
 .disabled {
     pointer-events: none; /* Prevents clicking */
     opacity: 0.3; /* Grays out the icon */
+}
+
+.content-selection {
+    padding: 6px;
+    background: palevioletred;
+    width: 12%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin:auto;
+    margin-bottom: 6px;
+
+
+    border-radius: 22px;
+
+    color: #eeeeee;
+    font-weight: 600;
+
+    cursor: pointer;
 }

@@ -5,8 +5,12 @@ import {Task} from "../models/task.model";
 import {ToastrService} from "ngx-toastr";
 import {SharedService} from "../services/shared.service";
 import {Subscription} from "rxjs";
-import {MatDialog} from "@angular/material/dialog";
+import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {EditTaskComponent} from "../edit-task/edit-task.component";
+import {Category} from "../models/category.model";
+import {TaskCategoriesService} from "../services/taskCategories.service";
+import {error} from "@angular/compiler-cli/src/transformers/util";
+import {EditCategoryComponent} from "../edit-category/edit-category.component";
 
 @Component({
   selector: 'app-task-list',
@@ -16,20 +20,25 @@ import {EditTaskComponent} from "../edit-task/edit-task.component";
 
 export class TaskListComponent {
   tasks: Task[] = [];
+  categories: Category[] =[];
   private subscriptions = new Subscription();
+  buttonText: string = "Tasks"
 
 
   constructor(private apiService: ApiService,
               private taskService: TaskService,
+              private categoryService: TaskCategoriesService,
               private toastr: ToastrService,
               private sharedService: SharedService,
               public dialog: MatDialog) {}
 
   ngOnInit():void {
     this.getSetTasks();
+    this.getSetCategories()
 
     this.subscriptions.add(this.sharedService.refreshNeeded.subscribe(() => {
       this.getSetTasks();
+      this.getSetCategories();
     }));
   }
 
@@ -37,6 +46,9 @@ export class TaskListComponent {
     this.subscriptions.unsubscribe();
   }
 
+  /**
+   * Get and set tasks
+   */
   getSetTasks() {
     this.taskService.getShowTasks().subscribe({
       next: (data) => {
@@ -50,6 +62,22 @@ export class TaskListComponent {
     });
   }
 
+  /**
+   * Get and set categories
+   */
+  getSetCategories() {
+    this.categoryService.getAllCategories().subscribe({
+      next: (data) => {
+        this.categories = data},
+      error: () => this.toastr.error('Failed to load tasks.')
+    })
+  }
+
+  /**
+   * Update task status
+   * @param task The task to update
+   * @param status The status to update to
+   */
   updateTaskStatus(task: Task, status: number): void {
     // Set the task status to 1 (deleted/completed)
     task.status = status;
@@ -63,11 +91,30 @@ export class TaskListComponent {
       },
       error: (error) => {
         this.toastr.error('Failed to update task status.');
-        console.error('There was an error!', error);
       }
     });
   }
 
+  /**
+   * Delete task category
+   * @param id The id of the category to be deleted
+   */
+  deleteCategory(id: number): void {
+    this.categoryService.deleteCategory(id).subscribe(
+        () => {
+          this.toastr.success('Category deleted successfully!');
+          this.getSetCategories();
+        },
+        error => {
+          this.toastr.error('Failed to delete category.');
+        }
+    )
+  }
+
+  /**
+   * Open task edit modal
+   * @param task The task to edit
+   */
   openEditModal(task: Task): void {
     const dialogRef = this.dialog.open(EditTaskComponent, {
       width: '100%',
@@ -80,5 +127,20 @@ export class TaskListComponent {
         console.log('The dialog was closed, result:', result);
       }
     });
+  }
+
+  openCategoryEditModal(category: Category): void {
+    const dialogRef:MatDialogRef<EditCategoryComponent> = this.dialog.open(EditCategoryComponent, {
+      width: '100%',
+      data: category
+    });
+  }
+
+  /**
+   * Change display view between tasks and categories
+   */
+  toggleButtonText() {
+    console.log(this.categories)
+    this.buttonText = this.buttonText === "Tasks" ? "Categories" : "Tasks";
   }
 }
