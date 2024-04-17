@@ -34,6 +34,11 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	runtimeOnly 'com.h2database:h2'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.mockito:mockito-junit-jupiter'
+//	testImplementation 'org.junit.jupiter:unit-jupiter-api'
+//	testImplementation 'org.junit.jupiter:junit-jupiter-engine'
+//	testImplementation 'org.junit.jupiter:junit-platform-launcher'
+//	testImplementation 'org.mockito:mockito-junit-jupiter'
 
 	compileOnly 'org.projectlombok:lombok:1.18.20'
 	annotationProcessor 'org.projectlombok:lombok:1.18.20'

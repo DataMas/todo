@@ -45,7 +45,7 @@ public class TaskCategoryController {
      * @return Response with message
      */
     @PostMapping
-    public ResponseEntity<TaskCategory> createCategory(@Valid @RequestBody TaskCategory category) {
+    public ResponseEntity<?> createCategory(@Valid @RequestBody TaskCategory category) {
         TaskCategory _category = taskCategoryRepository.save(category);
         return new ResponseEntity<>(_category, HttpStatus.CREATED);
     }
@@ -69,7 +69,7 @@ public class TaskCategoryController {
      * @return Response with message
      */
     @PutMapping("/{id}")
-    public ResponseEntity<TaskCategory> updateCategory(@PathVariable Long id,
+    public ResponseEntity<?> updateCategory(@PathVariable Long id,
                                                        @Valid @RequestBody TaskCategory categoryDetails) {
         TaskCategory category = taskCategoryRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Category not found with id: " + id));

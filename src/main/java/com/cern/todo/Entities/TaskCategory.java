@@ -14,6 +14,7 @@ public class TaskCategory {
 
     @Column(name = "category_name", nullable = false, length = 100)
     @NotBlank(message = "Category name is required")
+    @NotBlank(message = "Category name is required")
     private String categoryName;
 
     @Column(name = "category_description", length = 500)
