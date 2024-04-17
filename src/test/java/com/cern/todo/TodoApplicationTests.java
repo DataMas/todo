@@ -6,7 +6,6 @@ import com.cern.todo.Entities.Task;
 import com.cern.todo.Entities.TaskCategory;
 import com.cern.todo.Repository.TaskCategoryRepository;
 import com.cern.todo.Services.TaskService;
-import com.cern.todo.Utils.ApiResponse;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
@@ -22,9 +21,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 
 import java.util.*;
 
